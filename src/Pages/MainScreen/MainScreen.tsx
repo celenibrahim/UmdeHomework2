@@ -1,23 +1,23 @@
-import {Image, StyleSheet, View, useColorScheme} from 'react-native';
+import {Image, StyleSheet, View, useColorScheme, Button} from 'react-native';
 import React, {useState} from 'react';
 
-import CustomCard from './components/CustomCard';
-import CustomButton from './components/Button/CustomButton';
-import MergedButton from './components/Button/MergedButton';
+import CustomCard from '../../components/CustomCard';
+import CustomButton from '../../components/Button/CustomButton';
+import MergedButton from '../../components/Button/MergedButton';
 const imageList = [
-  require('./assets/adobe.png'),
-  require('./assets/appstore.png'),
-  require('./assets/mail.png'),
-  require('./assets/music.png'),
+  require('../../assets/adobe.png'),
+  require('../../assets/appstore.png'),
+  require('../../assets/mail.png'),
+  require('../../assets/music.png'),
 ];
 
-const App = () => {
+const App = ({navigation}: any) => {
   const theme = useColorScheme();
   const [headerColor, setHeaderColor] = useState('black');
   const [bgColor, setBgColor] = useState('#D69ADE');
   const [imageIndex, setImageIndex] = useState(0);
   const changeImage = () => {
-    setImageIndex(prevIndex => (prevIndex + 1) % imageList.length); // Döngüsel değiştirme
+    setImageIndex(prevIndex => (prevIndex + 1) % imageList.length);
   };
   return (
     <View
@@ -44,6 +44,10 @@ const App = () => {
         }
         button2={<CustomButton title="Change Logo" onPress={changeImage} />}
         image={<Image source={imageList[imageIndex]} />}
+      />
+      <Button
+        title="Go To The Game"
+        onPress={() => navigation.navigate('GameScreen')}
       />
     </View>
   );
